@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.User;
 import com.example.demo.mapper.UserMapper;
+import com.example.demo.service.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +10,26 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+
 @RestController
 @RequestMapping("/test")
 public class TestController {
 
+    @Autowired
+    public IUserService service;
+
     private final static Logger logger = LoggerFactory.getLogger(TestController.class);
 
+    /**
+     * 测试查库
+     * @param name
+     * @return
+     */
+    @RequestMapping("/getUserByName/{name}")
+    public User getUserByName(@PathVariable String name) {
+        return service.getUserByName(name);
+    }
     @RequestMapping("/log")
     public String testLog() {
         logger.debug("=====测试日志debug级别打印====");
@@ -30,11 +45,5 @@ public class TestController {
         return "success";
     }
 
-    @Autowired
-    private UserMapper dao;
 
-    @RequestMapping("/getUserByName/{name}")
-    public User getUserByName(@PathVariable String name) {
-        return dao.getUserByName(name);
-    }
 }
