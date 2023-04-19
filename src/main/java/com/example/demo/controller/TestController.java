@@ -18,7 +18,8 @@ public class TestController {
 
     @Autowired
     public IUserService service;
-
+    @Autowired
+    public UserMapper mapper;
     private final static Logger logger = LoggerFactory.getLogger(TestController.class);
 
     /**
@@ -28,7 +29,8 @@ public class TestController {
      */
     @RequestMapping("/getUserByName/{name}")
     public User getUserByName(@PathVariable String name) {
-        return service.getUserByName(name);
+        return mapper.getUserByName(name);
+        //return service.getUserByName(name);
     }
     @RequestMapping("/log")
     public String testLog() {

@@ -11,10 +11,10 @@ import javax.annotation.Resource;
 public class UserServiceImpl implements IUserService {
 
     @Resource
-    public UserMapper userMapper;
+    public UserMapper mapper;
 
     @Override
     public User getUserByName(String username) {
-        return userMapper.getUserByName(username);
+        return mapper.getUserByName(username);
     }
 }
